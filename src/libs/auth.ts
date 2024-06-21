@@ -3,12 +3,13 @@ import CredentialProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
-import type { NextAuthOptions } from 'next-auth'
+// import type { NextAuthConfig } from 'next-auth'
 import type { Adapter } from 'next-auth/adapters'
+import NextAuth from 'next-auth'
 
 const prisma = new PrismaClient()
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma) as Adapter,
 
   // ** Configure one or more authentication providers
@@ -124,4 +125,4 @@ export const authOptions: NextAuthOptions = {
       return session
     }
   }
-}
+})

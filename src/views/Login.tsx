@@ -241,7 +241,11 @@ const Login = ({ mode }: { mode: Mode }) => {
             className='self-center text-textPrimary'
             startIcon={<img src='/images/logos/google.png' alt='Google' width={22} />}
             sx={{ '& .MuiButton-startIcon': { marginInlineEnd: 3 } }}
-            onClick={() => signIn('google')}
+            //onClick={() => signIn('google')}
+            onClick={async () => {
+              'use server'
+              await signIn('google')
+            }}
           >
             Sign in with Google
           </Button>
